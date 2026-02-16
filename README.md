@@ -25,7 +25,6 @@ Before running the app, ensure you have the following installed:
 Clone the project from GitHub to your local machine:
 
 ```bash
-git clone https://github.com/<prajna-g-acharya>/<Predictive_Analytics_for_NYC_Subway_Ridership>.git
 cd <Predictive_Analytics_for_NYC_Subway_Ridership>
 ```
 
@@ -77,4 +76,5 @@ Ensure the following files are in the project directory:
    - **Predict Ridership**: Select a station, fare class, payment method, date (up to 2030), time, and weather conditions, then click "Predict Ridership" to get a prediction.
    - **Ridership Trends**: Select a station, fare class, payment method, year, and month, then click "Generate Ridership Chart" to view historical trends. Download the chart using the "Download Chart" button.
    - **Station Locations Map**: View an interactive map of the top 20 stations.
+
 
