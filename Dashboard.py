@@ -1,4 +1,10 @@
 import os
+
+java_home = "/usr/lib/jvm/java-11-openjdk-amd64"
+if os.path.exists(java_home):
+    os.environ["JAVA_HOME"] = java_home
+    os.environ["PATH"] = java_home + "/bin:" + os.environ.get("PATH", "")
+
 import pyspark as sp
 import streamlit as st
 import pandas as pd
@@ -177,10 +183,13 @@ def load_data():
     from pyspark.sql.functions import col, to_date, year, month, hour
 
     spark = SparkSession.builder \
-        .appName("Load Top 20 Stations") \
-        .config("spark.sql.catalogImplementation", "hive") \
-        .enableHiveSupport() \
-        .getOrCreate()
+    .appName("Load Top 20 Stations") \
+    .master("local[1]") \
+    .config("spark.ui.enabled", "false") \
+    .config("spark.driver.host", "localhost") \
+    .config("spark.driver.memory", "1g") \
+    .config("spark.sql.shuffle.partitions", "2") \
+    .getOrCreate()
 
     # Load the Parquet files containing MTA data
     top_20_data = spark.read.parquet("./mta_top20_joined_1")
