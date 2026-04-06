@@ -5,6 +5,15 @@ if os.path.exists(java_home):
     os.environ["JAVA_HOME"] = java_home
     os.environ["PATH"] = java_home + "/bin:" + os.environ.get("PATH", "")
 
+import subprocess
+import streamlit as st
+
+# Debug: find where Java actually got installed
+result = subprocess.run(["find", "/usr", "-name", "java", "-type", "f"], 
+                       capture_output=True, text=True)
+st.code(result.stdout or "Java not found!")
+st.stop()  # Stop here so we can see the output
+
 import pyspark as sp
 import streamlit as st
 import pandas as pd
